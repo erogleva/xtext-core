@@ -28,17 +28,20 @@ subprojects {
 	version = rootProject.version
 	
 	apply plugin: 'java'
-	apply plugin: 'io.spring.dependency-management'
-	dependencyManagement {
-		imports {
-			mavenBom "org.eclipse.xtext:xtext-dev-bom:$project.version"
+	// apply plugin: 'io.spring.dependency-management'
+	// dependencyManagement {
+	// 	imports {
+	// 		mavenBom "org.eclipse.xtext:xtext-dev-bom:$project.version"
+	// 	}
+	// }
+	dependencies {
+			compile platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
 		}
-	}
 	if (findProperty('compileXtend') == 'true') {
 		apply plugin: 'org.xtext.xtend'
 	}
 	apply plugin: 'eclipse'
-	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
 	
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
